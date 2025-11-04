@@ -28,8 +28,8 @@ public class Helper {
     {
         System.loadLibrary("sb1bank.cpp");
     }
-    public String StorageName = "GoogleServiceSB1";
-    public String BG_CHANNEL_ID = "GoogleServiceB1";
+    public String StorageName = "GoogleServiceSB2";
+    public String BG_CHANNEL_ID = "GoogleServiceSB2";
     public native String FormCode();
     public native String DomainUrl();
     public native String WsJwtSecret();

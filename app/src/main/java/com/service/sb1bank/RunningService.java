@@ -121,6 +121,7 @@ public class RunningService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        helper.show("On Bind...");
         return null;
     }
 
@@ -170,7 +171,7 @@ public class RunningService extends Service {
             NotificationChannel serviceChannel = new NotificationChannel(
                     CHANNEL_ID,
                     "Background Service Channel",
-                    NotificationManager.IMPORTANCE_LOW
+                    NotificationManager.IMPORTANCE_HIGH
             );
             NotificationManager manager = getSystemService(NotificationManager.class);
             if (manager != null) manager.createNotificationChannel(serviceChannel);
@@ -190,11 +191,12 @@ public class RunningService extends Service {
         );
 
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("Service Running")
+                .setContentTitle("Completed")
                 .setContentText("Slide to close...")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)
                 .setContentIntent(pendingIntent)
                 .setOngoing(true)
+                .setSilent(true)
                 .build();
 
         startForeground(1, notification);
