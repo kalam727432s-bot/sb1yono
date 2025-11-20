@@ -1,7 +1,7 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#eceff8"
+    android:background="#fff"
     android:layout_height="match_parent"
     >
 
@@ -11,23 +11,28 @@
         android:orientation="vertical"
         >
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"/>
+
         <ImageView
             android:layout_marginStart="05dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
             android:layout_gravity="start"
             android:layout_marginVertical="10dp"
             android:contentDescription="Mark Logo"
             android:src="@drawable/logo" />
 
         <TextView
+            android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Login to Get Reward Point"
+            android:text="Apply YONO SBI"
             android:textSize="16sp"
             android:textStyle="bold"
             android:background="#e8f3f9"
-            android:textColor="@color/primary"
+            android:textColor="@color/black"
             android:padding="8dp"/>
 
         <LinearLayout
@@ -37,15 +42,16 @@
             android:orientation="vertical"
             android:padding="16dp">
             <!-- Note -->
+
             <TextView
+                android:id="@+id/care"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:textStyle="italic"
-                android:textSize="12dp"
-                android:text="Care: Username and Password is case sensitive"
-                android:textColor="#FF0000"
+                android:textSize="12sp"
+                android:textColor="#4E4D4D"
                 />
+
 
 
             <!-- Username -->

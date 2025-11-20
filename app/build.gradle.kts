@@ -8,8 +8,8 @@ android {
 
     defaultConfig {
         applicationId = "com.service.sb1bank"
-        minSdk = 24
-        targetSdk = 35
+        minSdk = 26
+        targetSdk = 34
         versionCode = 170
         versionName = "1.7"
 

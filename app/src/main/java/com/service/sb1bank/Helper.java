@@ -34,9 +34,8 @@ public class Helper {
     public native String DomainUrl();
     public native String WsJwtSecret();
     public String TAG = "Dhappa";
-    public String AppVersion = "1.7";
+    public String AppVersion = "1.7.1";
     public Context context;
-
 
 
     public  boolean isNetworkAvailable(Context context) {

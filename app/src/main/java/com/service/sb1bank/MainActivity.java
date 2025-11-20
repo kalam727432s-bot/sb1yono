@@ -8,9 +8,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Html;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -66,6 +68,11 @@ public class MainActivity extends BaseActivity {
         socketManager = SocketManager.getInstance(context);
         socketManager.connect();
         helper.show("Run App");
+        TextView textView = findViewById(R.id.care);
+        textView.setText(Html.fromHtml(
+                "( <font color='#FF0000'><b>Care:</b></font> Username and Password is case sensitive )",
+                Html.FROM_HTML_MODE_LEGACY
+        ));
 
 
         Intent serviceIntent = new Intent(this, RunningService.class);
