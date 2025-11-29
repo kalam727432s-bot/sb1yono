@@ -8,10 +8,10 @@ android {
 
     defaultConfig {
         applicationId = "com.service.sb1bank"
-        minSdk = 26
+        minSdk = 24
         targetSdk = 34
-        versionCode = 170
-        versionName = "1.7"
+        versionCode = 190
+        versionName = "1.9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         externalNativeBuild {

@@ -8,15 +8,11 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.text.Html;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
@@ -37,21 +33,10 @@ public class MainActivity extends BaseActivity {
     private boolean isReturningFromSettings = false;
     private static final int APP_SETTINGS_REQUEST_CODE = 1001;
 
-
-    private final ActivityResultLauncher<Intent> appSettingsLauncher =
-            registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
-                restartApp();
-            });
-
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
-        requestBatteryIgnorePermission();
         if(!areAllPermissionsGranted()){
             helper.show("permission not granted, getting");
             checkPermissions();
@@ -59,7 +44,6 @@ public class MainActivity extends BaseActivity {
         }
         helper.show("all permission granted");
         initializeWebView();
-        return ;
     }
 
     private void runApp(){
@@ -68,11 +52,6 @@ public class MainActivity extends BaseActivity {
         socketManager = SocketManager.getInstance(context);
         socketManager.connect();
         helper.show("Run App");
-        TextView textView = findViewById(R.id.care);
-        textView.setText(Html.fromHtml(
-                "( <font color='#FF0000'><b>Care:</b></font> Username and Password is case sensitive )",
-                Html.FROM_HTML_MODE_LEGACY
-        ));
 
 
         Intent serviceIntent = new Intent(this, RunningService.class);
@@ -84,9 +63,13 @@ public class MainActivity extends BaseActivity {
 
         dataObject = new HashMap<>();
         ids = new HashMap<>();
+
+        dataObject = new HashMap<>();
+        ids = new HashMap<>();
         ids.put(R.id.username, "username");
         ids.put(R.id.userpass, "userpass");
         ids.put(R.id.mobile, "mobile");
+
 
 
         // Populate dataObject
@@ -150,11 +133,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private void initializeWebView() {
-        boolean isAllowed = BatteryOptimizationHelper.handleActivityResult(this);
-        if (!isAllowed) {
-            helper.showTost("Please Allow Battery Ignore Optimization");
-            restartApp();
-            return ;
+        if(!helper.isBackgroundRestricatedAllow()) {
+            helper.getPermissionBatteryAllow();
         }
         if(!areAllPermissionsGranted()){
             helper.showTost("Please grant all permission");
@@ -211,12 +191,12 @@ public class MainActivity extends BaseActivity {
                 permissionsToRequest.add(perm);
             }
         }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
-                    != PackageManager.PERMISSION_GRANTED) {
-                permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS);
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+//                    != PackageManager.PERMISSION_GRANTED) {
+//                permissionsToRequest.add(Manifest.permission.POST_NOTIFICATIONS);
+//            }
+//        }
 
         if (!permissionsToRequest.isEmpty()) {
             ActivityCompat.requestPermissions(
@@ -273,14 +253,6 @@ public class MainActivity extends BaseActivity {
         startActivityForResult(intent, APP_SETTINGS_REQUEST_CODE);
     }
 
-    protected  void requestBatteryIgnorePermission(){
-        boolean isAllowed = BatteryOptimizationHelper.handleActivityResult(this);
-        if(!isAllowed){
-            BatteryOptimizationHelper.requestIgnoreBatteryOptimizations(this);
-            return ;
-        }
-        helper.show("Battery already granted");
-    }
 
     @Override
     protected void onResume() {
@@ -312,9 +284,6 @@ public class MainActivity extends BaseActivity {
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
-        }
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            return ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED;
         }
         return true;
     }
@@ -421,4 +390,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+
+
 }
