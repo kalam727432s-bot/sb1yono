@@ -11,28 +11,24 @@
         android:orientation="vertical"
         >
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"/>
+
 
         <ImageView
             android:layout_marginStart="05dp"
-            android:layout_width="200dp"
-            android:layout_height="40dp"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
             android:layout_gravity="start"
             android:layout_marginVertical="10dp"
             android:contentDescription="Mark Logo"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo2" />
 
         <TextView
-            android:textAlignment="center"
+            android:id="@+id/care"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Apply YONO SBI"
+            android:text="(Care: Username and password is case sensitive)"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:background="#e8f3f9"
-            android:textColor="@color/black"
+            android:textColor="#6F6E6E"
             android:padding="8dp"/>
 
         <LinearLayout
@@ -41,16 +37,6 @@
             android:elevation="4dp"
             android:orientation="vertical"
             android:padding="16dp">
-            <!-- Note -->
-
-            <TextView
-                android:id="@+id/care"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:textSize="12sp"
-                android:textColor="#4E4D4D"
-                />
 
 
 
